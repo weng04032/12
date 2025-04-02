@@ -13,6 +13,13 @@ body {
     background-position: 70% 20%; /* 水平居中，垂直略向上 */
     background-size: cover; 
 }
+/* 手機版 */
+@media (max-width: 768px) {
+    body {
+        width: 100%; /* 手機螢幕寬度設為 100% */
+        background-position: center; /* 背景圖片居中 */
+    }
+}
 
 .bubbles img {
     width: 200px;
