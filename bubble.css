@@ -16,20 +16,25 @@ body {
 /* 手機版 */
 @media (max-width: 768px) {
     body {
-        width: 100%; /* 手機螢幕寬度設為 100% */
-        background-position: center; /* 背景圖片居中 */
+        width: 100%; /* 設置為 100%，讓其佔滿整個螢幕寬度 */
+        height: 100vh; /* 設定高度為 100% 視窗高度 */
+        background-image: url(images/coffee.png);
+        background-size: contain;  /* 背景圖片會完全顯示，保持比例 */
+    background-position: center; /* 背景圖片居中 */
+    background-repeat: no-repeat; /* 背景圖片不重複 */
+    background-color: rgb(40, 182, 185); /* 設定背景顏色，當圖片無法填滿容器時顯示此顏色 */
     }
 }
 
 .bubbles img {
-    width: 200px;
-    animation: buttle 8s linear infinite;
+    width: 150px;
+    animation: buttle 10s linear infinite;
 }
 
 /* 泡泡動畫 */
 @keyframes buttle {
     0% {
-        transform: translateY(-700px);
+        transform: translateY(0px);
         opacity: 0;
     }
     50% {
@@ -39,13 +44,13 @@ body {
         opacity: 1;
     }
     100% {
-        transform: translateY(0px);
+        transform: translateY(-700px);
         opacity: 0;  
     }
 }
 /* 泡泡語法 */
 .bubbles {
-    width: 100%;
+    width: 200%;
     display: flex;
     align-items: center;
     justify-content: space-around; /* 修正拼寫錯誤 */
@@ -66,10 +71,10 @@ body {
     text-shadow: 0 0 3px lightblue, 0 0 7px rgb(0, 187, 255);
 }
 /* 字位置語法 */
-.content h3 {
-    font-size: 55px;
+.content h4 {
+    font-size: 50px;
     color: rgb(252, 252, 252);
-    text-shadow: 0 0 3px lightblue, 0 0 20px rgb(162, 223, 254);
+    text-shadow: 0 0 3px rgb(178, 221, 235), 0 0 20px rgb(162, 223, 254);
 }
 /* 字顏色語法 */
 .enter {
@@ -92,19 +97,19 @@ body {
 }
 /* 泡泡動畫不同秒數語法 共10個圖片 */
 .bubbles img:nth-child(1) {
-    animation-delay: 0.1s;
+    animation-delay: 1s;
 }
 .bubbles img:nth-child(2) {
-    animation-delay: 0.3s;
+    animation-delay: 2s;
 }
 .bubbles img:nth-child(3) {
     animation-delay: 0.5s;
 }
 .bubbles img:nth-child(4) {
-    animation-delay: 1s;
+    animation-delay: 0.7s;
 }
 .bubbles img:nth-child(5) {
-    animation-delay: 0.2s;
+    animation-delay: 0.5s;
 }
 .bubbles img:nth-child(6) {
     animation-delay: 0.4s;
@@ -120,4 +125,10 @@ body {
 }
 .bubbles img:nth-child(10) {
     animation-delay: 1s;
+}
+.bubbles img:nth-child(11) {
+    animation-delay: 0.5s;
+}
+.bubbles img:nth-child(12) {
+    animation-delay: 4s;
 }
