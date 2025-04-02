@@ -22,7 +22,7 @@ body {
         background-size: contain;  /* 背景圖片會完全顯示，保持比例 */
     background-position: center; /* 背景圖片居中 */
     background-repeat: no-repeat; /* 背景圖片不重複 */
-    background-color: rgb(40, 182, 185); /* 設定背景顏色，當圖片無法填滿容器時顯示此顏色 */
+    background-color: rgba(188, 118, 4, 0.973); /* 設定背景顏色，當圖片無法填滿容器時顯示此顏色 */
     }
 }
 
@@ -81,7 +81,7 @@ body {
     color: rgb(252, 252, 252);
     padding: 10px 25px;
     background: transparent;
-    border: 1px solid rgb(65, 222, 225);
+    border: 1px solid rgb(254, 208, 2);
     border-radius: 20px;
     outline: none;
     cursor: pointer;
@@ -91,7 +91,7 @@ body {
 }
 /* 字外框語法 */
 .enter:hover { 
-    background-color: rgb(3, 181, 216);
+    background-color: rgb(220, 83, 4);
     color: rgb(255, 255, 255);
     transition: 1s;
 }
