@@ -5,14 +5,16 @@
 
 /* 電腦版 */
 body {
-    width: 50%;
+    width: 100%; /* 使背景覆蓋整個螢幕 */
     height: 100vh;
     overflow: hidden;
     background-image: url(images/coffee.png);
     background-size: cover;
-    background-position: 70% 20%; /* 水平居中，垂直略向上 */
-    background-size: cover; 
+    background-position: center; /* 背景圖片居中 */
+    background-repeat: no-repeat; /* 背景圖片不重複 */
+    background-color: rgba(213, 151, 6, 0.973); /* 設定背景顏色，當圖片無法填滿容器時顯示此顏色 */
 }
+
 /* 手機版 */
 @media (max-width: 768px) {
     body {
@@ -20,12 +22,13 @@ body {
         height: 100vh; /* 設定高度為 100% 視窗高度 */
         background-image: url(images/coffee.png);
         background-size: cover;  /* 背景圖片會完全顯示，保持比例 */
-    background-position: center; /* 背景圖片居中 */
-    background-repeat: no-repeat; /* 背景圖片不重複 */
-    background-color: rgba(213, 151, 6, 0.973); /* 設定背景顏色，當圖片無法填滿容器時顯示此顏色 */
+        background-position: center; /* 背景圖片居中 */
+        background-repeat: no-repeat; /* 背景圖片不重複 */
+        background-color: rgba(213, 151, 6, 0.973); /* 設定背景顏色，當圖片無法填滿容器時顯示此顏色 */
     }
 }
 
+/* 泡泡動畫 */
 .bubbles img {
     width: 150px;
     animation: buttle 10s linear infinite;
@@ -48,7 +51,8 @@ body {
         opacity: 0;  
     }
 }
-/* 泡泡語法 */
+
+/* 泡泡容器 */
 .bubbles {
     width: 400%;
     display: flex;
@@ -57,12 +61,13 @@ body {
     position: absolute;
     bottom: 0;
 }
-/* 字位置語法 */
+
+/* 文字位置 */
 .content {
-    position: fixed;
+    position: absolute;
     top: 50%;
-    left: 100%;
-    transform: translate(-50%, -50%);
+    left: 50%;
+    transform: translate(-50%, -50%); /* 使文字完全居中 */
     text-align: center;
     z-index: 2;
     display: flex;
@@ -71,19 +76,14 @@ body {
     gap: 10px;
 }
 
-/* 字位置語法 */
-.content h4 {
-    font-size: 40px;
-    color: rgb(250, 250, 251);
-    text-shadow: 0 0 3px lightblue, 0 0 7px rgb(0, 187, 255);
-}
-/* 字位置語法 */
+/* 標題樣式 */
 .content h4 {
     font-size: 50px;
     color: rgb(252, 252, 252);
     text-shadow: 0 0 3px rgb(178, 221, 235), 0 0 20px rgb(162, 223, 254);
 }
-/* 字顏色語法 */
+
+/* 按鈕樣式 */
 .enter {
     color: rgb(252, 252, 252);
     padding: 10px 25px;
@@ -92,17 +92,19 @@ body {
     border-radius: 20px;
     outline: none;
     cursor: pointer;
-    text-align: right;
+    text-align: center; /* 按鈕文字居中 */
     text-shadow: 0 0 3px rgb(0, 187, 255), 0 0 5px royalblue;
     font-size: 20px;
 }
-/* 字外框語法 */
+
+/* 按鈕 hover 狀態 */
 .enter:hover { 
     background-color: rgb(220, 83, 4);
     color: rgb(255, 255, 255);
     transition: 1s;
 }
-/* 泡泡動畫不同秒數語法 共10個圖片 */
+
+/* 泡泡動畫不同秒數 */
 .bubbles img:nth-child(1) {
     animation-delay: 5s;
 }
@@ -146,39 +148,7 @@ body {
     z-index: 9999; /* 確保選單在最上層 */
 }
 
-/* 確保 select 元素有足夠的可操作區域 */
-.business-dropdown select {
-    font-size: 16px;
-    padding: 10px;
-    width: 200px;
-    border: 1px solid #ddd;
-    border-radius: 5px;
-    background-color: #fff;
-    color: #333;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-    z-index: 10000; /* 確保 select 在最上層 */
-}
-
-/* 手機版樣式調整 */
-@media only screen and (max-width: 800px) {
-    .content h4 {
-        font-size: 18px;
-    }
-
-    .enter {
-        font-size: 14px;
-        padding: 8px 16px;
-    }
-}
- 
-    .business-dropdown {
-        top: 40px; /* 調整位置以免選單與其他內容重疊 */
-        z-index: 9999; /* 確保選單位於最上層 */
-}
-
-
-/* 選單文字使用草寫字體 */
+/* 下拉選單樣式 */
 .business-dropdown select {
     font-size: 16px;
     padding: 10px;
@@ -197,6 +167,30 @@ body {
     background-color: #974b04;
     color: #fff;
 }
+
+/* 手機版樣式調整 */
+@media only screen and (max-width: 768px) {
+    .content {
+        /* 確保文字垂直和水平完全居中 */
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        text-align: center;
+        z-index: 2;
+    }
+
+    .content h4 {
+        font-size: 18px;
+        margin-bottom: 20px;
+    }
+
+    .enter {
+        font-size: 14px;
+        padding: 8px 16px;
+    }
+}
+
 /* 社交媒體按鈕 */
 .social-buttons {
     position: fixed;
@@ -240,4 +234,3 @@ body {
     background-color: #f5e145; /* 滑鼠懸停時的背景色 */
     transform: scale(1.1); /* 當滑鼠懸停時稍微放大 */
 }
-
