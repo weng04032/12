@@ -1,80 +1,373 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="zh-Hant">
 <head>
+    <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>咖啡美寓</title>
-    
-    <!-- 連接CSS -->
+      
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="bubble.css">
-
+    <link rel="preload" href="images/coffee2.webp" as="image">
+    <link rel="preload" href="images/coffee3.webp" as="image">
+    <link rel="preload" href="images/coffee5.webp" as="image">
+    <link rel="preload" href="images/coffee6.webp" as="image">
+    <link rel="preload" href="images/coffee7.webp" as="image">
+    
     <style>
         * {
+            margin: 0;
+            padding: 0;
             box-sizing: border-box;
         }
-        .menu {
-            float: left;
-            width: 20%;
-        }
-        .menuitem {
-            padding: 8px;
-            margin-top: 7px;
-            border-bottom: 1px solid #f1f1f1;
-        }
-        .main {
-            float: left;
-            width: 60%;
-            padding: 0 20px;
-            overflow: hidden;
-        }
-        .right {
-            background-color: rgb(222, 243, 246);
-            float: left;
-            width: 20%;
-            padding: 10px 15px;
-            margin-top: 7px;
+
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f7f7f7;
         }
 
-        @media only screen and (max-width: 800px) {
-            /* For tablets: */
-            .main {
-                width: 80%;
-                padding: 0;
+       /* 桌機版背景更換動畫 */
+@keyframes desktopBackgroundChange {
+    0%   { background-image: url(images/coffee2.webp); }
+    25%  { background-image: url(images/coffee3.webp); }
+    50%  { background-image: url(images/coffee5.webp); }
+    75%  { background-image: url(images/coffee6.webp); }
+    100% { background-image: url(images/coffee7.webp); }
+}
+
+@keyframes mobileBackgroundChange {
+    0%   { background-image: url(images/coffeeh2.png); }
+    25%  { background-image: url(images/coffeeh3.png); }
+    50%  { background-image: url(images/coffeeh4.png); }
+    75%  { background-image: url(images/coffeeh5.png); }
+    100% { background-image: url(images/coffeeh2.png); }
+}
+
+/* 共用背景容器 */
+body::before {
+    content: "";
+    position: fixed;
+    top: 0; left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    animation: desktopBackgroundChange 15s infinite;
+    transition: background-position 1s ease-in-out; /* 改用 position 變化，減少圖片切換 */
+}
+/* 手機版背景動畫 */
+@media only screen and (max-width: 700px) {
+    body::before {
+        animation: mobileBackgroundChange 20s infinite;
+    }
+}
+
+
+        /* 其他樣式保持不變 */
+        .business-dropdown select {
+            font-size: 16px;
+            padding: 10px;
+            width: 200px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            background-color: #fff;
+            color: #333;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .business-dropdown select:hover {
+            background-color: #f47906;
+            color: #fff;
+        }
+
+        .social-buttons {
+            position: fixed;
+            bottom: 20px;
+            left: 20px; 
+            display: flex;
+            gap: 20px;
+            z-index: 9999; /* 確保社交媒體按鈕位於最上層 */
+        }
+
+        .social-buttons a {
+            text-decoration: none;
+        }
+
+        .social-buttons img {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            transition: transform 0.3s ease;
+        }
+
+        .social-buttons img:hover {
+            transform: scale(1.1);
+        }
+
+        /* 去除文字動畫 */
+        .content {
+            text-align: center;
+            margin-top: 50px;
+            opacity: 1; /* 取消動畫效果 */
+            z-index: 2;
+            position: relative;
+            padding-bottom: 100px;
+        }
+
+        h4 {
+            font-size: 24px;
+            margin-bottom: 10px;
+            opacity: 1; /* 取消動畫效果 */
+        }
+
+        .enter {
+            padding: 10px 20px;
+            background-color: #fc870a;
+            border: none;
+            color: white;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background-color 0.3s, transform 0.3s;
+            z-index: 3;
+            position: absolute;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        .enter:hover {
+            background-color: #f5e145;
+            transform: scale(1.1);
+        }
+
+        .bubbles {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            pointer-events: none;
+            opacity: 0.6;
+            z-index: 1;
+        }
+
+        .bubbles img {
+            width: 100px;
+            height: 80px;
+            margin: 10px;
+            animation: bubbleMovement 8s ease-in-out infinite, bubbleFloat 8s ease-in-out infinite, bubbleRotation 12s linear infinite;
+        }
+
+        @keyframes bubbleMovement {
+            0% {
+                transform: translateY(0) scale(1);
+                opacity: 1;
             }
-            .right {
-                width: 100%;
+            100% {
+                transform: translateY(-1000px) scale(2);
+                opacity: 0;
             }
         }
-        @media only screen and (max-width: 700px) {
-            /* For mobile phones: */
-            .menu, .main, .right {
-                width: 80%;
+
+        @keyframes bubbleFloat {
+            0% {
+                transform: translateX(0px);
+            }
+            50% {
+                transform: translateX(-20px);
+            }
+            100% {
+                transform: translateX(80px);
+            }
+        }
+
+        @keyframes bubbleRotation {
+            0% {
+                transform: rotate(0deg);
+            }
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+
+        .cake-box {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: rgba(255, 255, 255, 0.8); /* 設置為透明白色，透明度為 0.8 */
+            border-radius: 10px;
+            width: 80%;
+            max-width: 600px;
+            margin: 20px auto 40px auto;
+            padding: 20px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease-in-out;
+            position: relative;
+            z-index: 10000; /* 確保蛋糕框位於最上層 */
+        }
+
+        .cake-box:hover {
+            transform: scale(1.05);
+            
+        }
+
+        .cake-image {
+            width: 200px;
+            height: 200px;
+            object-fit: cover;
+            border-radius: 10px;
+            margin-right: 20px;
+            margin-top: 10px;
+        }
+
+        .cake-description {
+            font-size: 16px;
+            color: #333;
+            line-height: 1.5;
+            max-width: 500px;
+        }
+
+        .cake-description {
+            opacity: 0;
+            animation: fadeInText 3s forwards;
+        }
+
+        .close-btn {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            font-size: 24px;
+            background: none;
+            border: none;
+            color: #333;
+            cursor: pointer;
+        }
+
+        .close-btn:hover {
+            color: #fc870a;
+        }
+
+        @keyframes fadeIn {
+            0% {
+                opacity: 0;
+            }
+            100% {
+                opacity: 1;
+            }
+        }
+
+        @keyframes fadeInText {
+            0% {
+                opacity: 0;
+            }
+            50% {
+                opacity: 2;
+            }
+            100% {
+                opacity: 1;
+            }
+        }
+
+        /* 手機版樣式調整 */
+        @media only screen and (max-width: 800px) {
+            .content {
+                margin-top: 30px;
+            }
+
+            h4 {
+                font-size: 20px;
+            }
+
+            .enter {
+                font-size: 14px;
+                padding: 8px 16px;
+            }
+
+            .cake-box {
+                flex-direction: column;
+                width: 90%;
+                max-width: none;
+                margin: 20px auto;
+                padding: 15px;
+            }
+
+            .cake-image {
+                width: 150px;
+                height: 150px;
+                margin-right: 0;
+                margin-bottom: 15px;
+                margin-top: -30px;
+            }
+
+            .cake-description {
+                font-size: 16px;
             }
         }
     </style>
 </head>
 
 <body>
+    <!-- 右側營業項目下拉選單 -->
+    <div class="business-dropdown">
+        <label for="businessSelect"></label>
+        <select id="businessSelect">
+            <option value="coffee">精選咖啡 Coffee</option>
+            <option value="cake">風味飲品 Flavored Drink</option>
+            <option value="lunch">輕食 Snack</option>
+            <option value="juice">鬆餅 Waffle</option>
+            <option value="tea">訂位 Book a table</option>
+            <option value="takeaway">外帶 Takeaway</option>
+        </select>
+    </div>
+
     <!-- 內容 -->
     <div class="content">
-        <h4>歡迎來到</h4>
-        <h4>“咖啡美寓“</h4>
-        <button type="button" class="enter">休息片刻</button>
+        <h4>WECOMED TO COFFEE BEAUTY APARTMAEN</h4>
+      
+        <button class="enter">放鬆時刻</button>
     </div>
     
     <!-- 烟泡泡 -->
     <div class="bubbles">
-        <img src="images/bubble.png">
-        <img src="images/bubble.png">
-        <img src="images/bubble.png">
-        <img src="images/bubble.png">
-        <img src="images/bubble.png">
-        <img src="images/bubble.png">
-        <img src="images/bubble.png">
-        <img src="images/bubble.png">
-        <img src="images/bubble.png">
-        <img src="images/bubble.png">
-        <img src="images/bubble.png">
-        <img src="images/bubble.png">
+        <img src="images/bubble.png" alt="煙泡泡">
+        <!-- 更多泡泡 -->
     </div>
+
+    <!-- 蛋糕圖文框 -->
+    <div class="cake-box" id="cake-box">
+        <button class="close-btn" onclick="closeCakeBox()">×</button>
+        <img src="images/lemon cake.png" alt="蛋糕圖片" class="cake-image">
+        <div class="cake-description">
+            <h3>新品推薦_輕檸蛋糕</h3>
+            <p><BR>檸檬蛋糕起源於南法小鎮『蒙頓』，<br>採用新鮮檸檬、日本三溫糖、法國奶油，<br>可增加蛋糕體的保濕性、口感濕潤綿密~</p>
+        </div>
+    </div>
+
+  <!-- 社交媒體按鈕 -->
+<div class="social-buttons">
+     <!-- 聯絡我們文字按鈕 -->
+     <a href="929kellen@gmail.com" class="contact-link">聯絡我們</a>
+
+    <a href="https://www.facebook.com/yourpage" target="_blank">
+        <img src="images/fbicon.png" alt="Facebook">
+    </a>
+
+    <a href="https://www.instagram.com/yourpage" target="_blank">
+        <img src="images/line icon.png" alt="Instagram">
+    </a>
+
+</div>
+
+<script>
+     // 用來關閉蛋糕框的函數
+     function closeCakeBox() {
+            document.getElementById("cake-box").style.display = "none";
+    }
+</script>
 </body>
 </html>
+

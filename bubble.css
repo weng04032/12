@@ -19,10 +19,10 @@ body {
         width: 100%; /* 設置為 100%，讓其佔滿整個螢幕寬度 */
         height: 100vh; /* 設定高度為 100% 視窗高度 */
         background-image: url(images/coffee.png);
-        background-size: contain;  /* 背景圖片會完全顯示，保持比例 */
+        background-size: cover;  /* 背景圖片會完全顯示，保持比例 */
     background-position: center; /* 背景圖片居中 */
     background-repeat: no-repeat; /* 背景圖片不重複 */
-    background-color: rgba(188, 118, 4, 0.973); /* 設定背景顏色，當圖片無法填滿容器時顯示此顏色 */
+    background-color: rgba(213, 151, 6, 0.973); /* 設定背景顏色，當圖片無法填滿容器時顯示此顏色 */
     }
 }
 
@@ -50,7 +50,7 @@ body {
 }
 /* 泡泡語法 */
 .bubbles {
-    width: 200%;
+    width: 400%;
     display: flex;
     align-items: center;
     justify-content: space-around; /* 修正拼寫錯誤 */
@@ -59,11 +59,18 @@ body {
 }
 /* 字位置語法 */
 .content {
-    position: absolute;
-    top: 30%;
-    left: 30%; /* 更改為50%以保證居中 */
-    transform: translate(-30%, -60%);
+    position: fixed;
+    top: 50%;
+    left: 100%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+    z-index: 2;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
 }
+
 /* 字位置語法 */
 .content h4 {
     font-size: 40px;
@@ -97,7 +104,7 @@ body {
 }
 /* 泡泡動畫不同秒數語法 共10個圖片 */
 .bubbles img:nth-child(1) {
-    animation-delay: 1s;
+    animation-delay: 5s;
 }
 .bubbles img:nth-child(2) {
     animation-delay: 2s;
@@ -126,9 +133,111 @@ body {
 .bubbles img:nth-child(10) {
     animation-delay: 1s;
 }
-.bubbles img:nth-child(11) {
-    animation-delay: 0.5s;
+
+/* 右側營業項目下拉選單 */
+.business-dropdown {
+    position: fixed;
+    right: 20px;
+    top: 100px;
+    background-color: #fff;
+    padding: 10px;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    z-index: 9999; /* 確保選單在最上層 */
 }
-.bubbles img:nth-child(12) {
-    animation-delay: 4s;
+
+/* 確保 select 元素有足夠的可操作區域 */
+.business-dropdown select {
+    font-size: 16px;
+    padding: 10px;
+    width: 200px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    background-color: #fff;
+    color: #333;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    z-index: 10000; /* 確保 select 在最上層 */
 }
+
+/* 手機版樣式調整 */
+@media only screen and (max-width: 800px) {
+    .content h4 {
+        font-size: 18px;
+    }
+
+    .enter {
+        font-size: 14px;
+        padding: 8px 16px;
+    }
+}
+ 
+    .business-dropdown {
+        top: 40px; /* 調整位置以免選單與其他內容重疊 */
+        z-index: 9999; /* 確保選單位於最上層 */
+}
+
+
+/* 選單文字使用草寫字體 */
+.business-dropdown select {
+    font-size: 16px;
+    padding: 10px;
+    width: 200px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    background-color: #fff;
+    color: #333;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    font-family: 'Dancing Script', cursive; /* 設定草寫字體 */
+}
+
+/* hover 時背景顏色變化 */
+.business-dropdown select:hover {
+    background-color: #974b04;
+    color: #fff;
+}
+/* 社交媒體按鈕 */
+.social-buttons {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    display: flex;
+    gap: 20px;
+    z-index: 9999; /* 確保社交媒體按鈕位於最上層 */
+}
+
+.social-buttons a {
+    text-decoration: none;
+}
+
+.social-buttons img {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    transition: transform 0.3s ease;
+}
+
+.social-buttons img:hover {
+    transform: scale(1.1);
+}
+
+/* 聯絡我們文字按鈕樣式 */
+.contact-link {
+    padding: 10px 20px;
+    background-color: #fc870a;
+    color: white;
+    font-size: 16px;
+    border-radius: 5px;
+    text-decoration: none; /* 移除下劃線 */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background-color 0.3s, transform 0.3s;
+}
+
+.contact-link:hover {
+    background-color: #f5e145; /* 滑鼠懸停時的背景色 */
+    transform: scale(1.1); /* 當滑鼠懸停時稍微放大 */
+}
+
